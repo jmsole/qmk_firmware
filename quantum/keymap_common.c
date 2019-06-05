@@ -63,6 +63,9 @@ action_t action_for_key(uint8_t layer, keypos_t key)
         case KC_AUDIO_MUTE ... KC_BRIGHTNESS_DOWN:
             action.code = ACTION_USAGE_CONSUMER(KEYCODE2CONSUMER(keycode));
             break;
+        case KC_APPLE_FN:
+            action.code = ACTION_APPLE_FN(keycode);
+            break;
         case KC_MS_UP ... KC_MS_ACCEL2:
             action.code = ACTION_MOUSEKEY(keycode);
             break;

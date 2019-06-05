@@ -221,7 +221,11 @@ enum usb_endpoints {
 # error There are not enough available endpoints to support all functions. Remove some in the rules.mk file. (MOUSEKEY, EXTRAKEY, CONSOLE, NKRO, MIDI, SERIAL, STENO)
 #endif
 
-#define KEYBOARD_EPSIZE             8
+#ifdef APPLE_FN_ENABLE
+  #define KEYBOARD_EPSIZE           9
+#else
+  #define KEYBOARD_EPSIZE           8
+#endif
 #define SHARED_EPSIZE               32
 #define MOUSE_EPSIZE                8
 #define RAW_EPSIZE                  32
