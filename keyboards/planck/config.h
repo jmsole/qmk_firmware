@@ -21,8 +21,8 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 #include "config_common.h"
 
 /* USB Device descriptor parameter */
-#define VENDOR_ID       0xFEED
-#define PRODUCT_ID      0x6060
+#define VENDOR_ID       0x05AC
+#define PRODUCT_ID      0x0255
 #define MANUFACTURER    OLKB
 #define PRODUCT         Planck
 #define DESCRIPTION     A compact ortholinear keyboard
@@ -74,11 +74,14 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 /* disable print */
 //#define NO_PRINT
 
-/* disable action features */
-//#define NO_ACTION_LAYER
-//#define NO_ACTION_TAPPING
-//#define NO_ACTION_ONESHOT
-//#define NO_ACTION_MACRO
-//#define NO_ACTION_FUNCTION
+#define NO_ACTION_ONESHOT
+#define NO_ACTION_MACRO
+#define NO_ACTION_FUNCTION
+#define TAPPING_TOGGLE 2
+// #define TAPPING_TERM_PER_KEY
+#define IGNORE_MOD_TAP_INTERRUPT
+// #define PERMISSIVE_HOLD
+#define RETRO_TAPPING
+#define TAPPING_TERM 270
 
 #endif
