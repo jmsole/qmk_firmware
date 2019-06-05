@@ -55,7 +55,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
     KC_GRV,  KC_Q,    KC_W,    KC_E,    KC_R,    KC_T,    KC_Y,    KC_U,    KC_I,    KC_O,   KC_P, KC_BSPC,
     KC_TAB,  KC_A,    KC_S,    KC_D,    KC_F,    KC_G,    KC_H,    KC_J,    KC_K,    KC_L,KC_SCLN, KC_QUOT,
     KC_LSFT, KC_Z,    KC_X,    KC_C,    KC_V,    KC_B,    KC_N,    KC_M,    KC_COMM, KC_DOT,KC_SLSH, RSFT_T(KC_ENT),
-    KC_LCTL, KC_LALT, KC_LGUI, KC_SPC,TT(LOWER),KC_SPC,RALT_T(KC_SPC),TT(RAISE),KC_LEFT, KC_DOWN,KC_UP, KC_RGHT
+    KC_LCTL, KC_LALT, KC_LGUI, KC_LEAD,TT(LOWER),KC_SPC,RALT_T(KC_SPC),TT(RAISE),KC_LEFT, KC_DOWN,KC_UP, KC_RGHT
 ),
 
 /* Win
@@ -127,7 +127,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
     KC_ESC , KC_1  , KC_2  , KC_3  , KC_4  , KC_5  , KC_6  , KC_7  , KC_8  , KC_9  , KC_0  , KC_DEL,
     KC_DEL ,KC_MINS, KC_EQL,KC_LBRC,KC_RBRC,_______,KC_LEFT,KC_DOWN, KC_UP ,KC_RGHT,_______,KC_BSLS,
     _______,KC_UNDS,KC_PLUS,KC_LCBR,KC_RCBR,_______,_______,KC_MINS, KC_EQL,KC_LBRC,KC_RBRC,_______,
-    _______,_______,_______,_______,_______,_______,_______,_______,_______,_______,_______,_______
+    _______,_______,_______,_______,_______,_______,_______,_______,KC_HOME,_______,_______, KC_END
 ),
 
 /* Adjust (Lower + Raise)
@@ -156,7 +156,7 @@ uint16_t get_tapping_term(uint16_t keycode) {
     case RSFT_T(KC_ENT):
       return 100;
       case RALT_T(KC_SPC):
-      return TAPPING_TERM + 50;
+      return TAPPING_TERM + 80;
     default:
       return TAPPING_TERM;
   }
@@ -192,63 +192,6 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
       }
       return false;
       break;
-    // case COLEMAK:
-    //   if (record->event.pressed) {
-    //     set_single_persistent_default_layer(_COLEMAK);
-    //   }
-    //   return false;
-    //   break;
-    // case DVORAK:
-    //   if (record->event.pressed) {
-    //     set_single_persistent_default_layer(_DVORAK);
-    //   }
-    //   return false;
-    //   break;
-    // case BACKLIT:
-    //   if (record->event.pressed) {
-    //     register_code(KC_RSFT);
-    //     #ifdef BACKLIGHT_ENABLE
-    //       backlight_step();
-    //     #endif
-    //     #ifdef KEYBOARD_planck_rev5
-    //       PORTE &= ~(1<<6);
-    //     #endif
-    //   } else {
-    //     unregister_code(KC_RSFT);
-    //     #ifdef KEYBOARD_planck_rev5
-    //       PORTE |= (1<<6);
-    //     #endif
-    //   }
-    //   return false;
-    //   break;
-    // case PLOVER:
-    //   if (record->event.pressed) {
-    //     #ifdef AUDIO_ENABLE
-    //       stop_all_notes();
-    //       PLAY_SONG(plover_song);
-    //     #endif
-    //     layer_off(_RAISE);
-    //     layer_off(_LOWER);
-    //     layer_off(_ADJUST);
-    //     layer_on(_PLOVER);
-    //     if (!eeconfig_is_enabled()) {
-    //         eeconfig_init();
-    //     }
-    //     keymap_config.raw = eeconfig_read_keymap();
-    //     keymap_config.nkro = 1;
-    //     eeconfig_update_keymap(keymap_config.raw);
-    //   }
-    //   return false;
-    //   break;
-    // case EXT_PLV:
-    //   if (record->event.pressed) {
-    //     #ifdef AUDIO_ENABLE
-    //       PLAY_SONG(plover_gb_song);
-    //     #endif
-    //     layer_off(_PLOVER);
-    //   }
-    //   return false;
-    //   break;
   }
   return true;
 }
@@ -322,28 +265,46 @@ uint16_t muse_tempo = 50;
 //    }
 // }
 
-void matrix_scan_user(void) {
-  #ifdef AUDIO_ENABLE
-    if (muse_mode) {
-      if (muse_counter == 0) {
-        uint8_t muse_note = muse_offset + SCALE[muse_clock_pulse()];
-        if (muse_note != last_muse_note) {
-          stop_note(compute_freq_for_midi_note(last_muse_note));
-          play_note(compute_freq_for_midi_note(muse_note), 0xF);
-          last_muse_note = muse_note;
-        }
-      }
-      muse_counter = (muse_counter + 1) % muse_tempo;
-    }
-  #endif
-}
+LEADER_EXTERNS();
 
-bool music_mask_user(uint16_t keycode) {
-  switch (keycode) {
-    case RAISE:
-    case LOWER:
-      return false;
-    default:
-      return true;
+void matrix_scan_user(void) {
+  LEADER_DICTIONARY() {
+    leading = false;
+    leader_end();
+
+    // SEQ_ONE_KEY(KC_F) {
+    //   // Anything you can do in a macro.
+    //   SEND_STRING("QMK is awesome.");
+    // }
+    // SEQ_TWO_KEYS(KC_D, KC_D) {
+    //   SEND_STRING(SS_LCTRL("a")SS_LCTRL("c"));
+    // }
+    SEQ_THREE_KEYS(KC_D, KC_D, KC_S) {
+      SEND_STRING("https://start.duckduckgo.com"SS_TAP(X_ENTER));
+    }
+    SEQ_TWO_KEYS (KC_R, KC_R) {
+      tap_random_base64();
+      tap_random_base64();
+      tap_random_base64();
+      tap_random_base64();
+      tap_random_base64();
+      tap_random_base64();
+      tap_random_base64();
+      tap_random_base64();
+      tap_random_base64();
+      tap_random_base64();
+      tap_random_base64();
+      tap_random_base64();
+      tap_random_base64();
+      tap_random_base64();
+      tap_random_base64();
+      tap_random_base64();
+    }
+    // SEQ_TWO_KEYS(KC_A, KC_S) {
+    //   register_code(KC_LGUI);
+    //   register_code(KC_S);
+    //   unregister_code(KC_S);
+    //   unregister_code(KC_LGUI);
+    // }
   }
 }
