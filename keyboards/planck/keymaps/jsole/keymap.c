@@ -37,6 +37,8 @@ enum planck_keycodes {
 
 #define LOWER MO(_LOWER)
 #define RAISE MO(_RAISE)
+#define KC_INQS RALT(S(KC_SLSH))
+#define KC_UPQS S(KC_SLSH)
 
 const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
 
@@ -46,16 +48,16 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
  * |------+------+------+------+------+-------------+------+------+------+------+------|
  * | Tab  |   A  |   S  |   D  |   F  |   G  |   H  |   J  |   K  |   L  |   ;  |  '   |
  * |------+------+------+------+------+------|------+------+------+------+------+------|
- * | Shift|   Z  |   X  |   C  |   V  |   B  |   N  |   M  |   ,  |   .  |  /   |Sh/Ent|
+ * | Shift|   Z  |   X  |   C  |   V  |   B  |   N  |   M  |   ,  |   .  |  Up  |Sh/Ent|
  * |------+------+------+------+------+------+------+------+------+------+------+------|
- * | Ctrl | GUI  | Alt  |AppFn |Lower |Space |Sp/RAl|Raise | Left | Down |  Up  |Right |
+ * | Ctrl | GUI  | Alt  |AppFn |Lower |Space |Space |Raise |//RAl | Left | Down |Right |
  * `-----------------------------------------------------------------------------------'
  */
 [_MAC] = LAYOUT_planck_grid(
     KC_GRV,  KC_Q,    KC_W,    KC_E,    KC_R,    KC_T,    KC_Y,    KC_U,    KC_I,    KC_O,   KC_P, KC_BSPC,
     KC_TAB,  KC_A,    KC_S,    KC_D,    KC_F,    KC_G,    KC_H,    KC_J,    KC_K,    KC_L,KC_SCLN, KC_QUOT,
-    KC_LSFT, KC_Z,    KC_X,    KC_C,    KC_V,    KC_B,    KC_N,    KC_M,    KC_COMM, KC_DOT,KC_SLSH, RSFT_T(KC_ENT),
-    KC_LCTL, KC_LALT, KC_LGUI, KC_LEAD,TT(LOWER),KC_SPC,RALT_T(KC_SPC),TT(RAISE),KC_LEFT, KC_DOWN,KC_UP, KC_RGHT
+    KC_LSFT, KC_Z,    KC_X,    KC_C,    KC_V,    KC_B,    KC_N,    KC_M,    KC_COMM, KC_DOT,KC_UP, RSFT_T(KC_ENT),
+    KC_LCTL, KC_LALT, KC_LGUI, KC_LEAD,TT(LOWER),KC_SPC,KC_SPC,TT(RAISE),RALT_T(KC_SLSH), KC_LEFT,KC_DOWN, KC_RGHT
 ),
 
 /* Win
@@ -64,16 +66,16 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
  * |------+------+------+------+------+-------------+------+------+------+------+------|
  * | Tab  |   A  |   S  |   D  |   F  |   G  |   H  |   J  |   K  |   L  |   ;  |  '   |
  * |------+------+------+------+------+------|------+------+------+------+------+------|
- * | Shift|   Z  |   X  |   C  |   V  |   B  |   N  |   M  |   ,  |   .  |  /   |Sh/Ent|
+ * | Shift|   Z  |   X  |   C  |   V  |   B  |   N  |   M  |   ,  |   .  |  Up  |Sh/Ent|
  * |------+------+------+------+------+------+------+------+------+------+------+------|
- * | Ctrl | Alt  | GUI  | RAlt |Lower |Space |Sp/RAl|Raise | Left | Down |  Up  |Right |
+ * | Ctrl | Alt  | GUI  | RAlt |Lower |Space |Space |Raise |//RAl | Left | Down |Right |
  * `-----------------------------------------------------------------------------------'
  */
 [_WIN] = LAYOUT_planck_grid(
     KC_GRV,  KC_Q,    KC_W,    KC_E,    KC_R,    KC_T,    KC_Y,    KC_U,    KC_I,    KC_O,   KC_P, KC_BSPC,
     KC_TAB,  KC_A,    KC_S,    KC_D,    KC_F,    KC_G,    KC_H,    KC_J,    KC_K,    KC_L,KC_SCLN, KC_QUOT,
-    KC_LSFT, KC_Z,    KC_X,    KC_C,    KC_V,    KC_B,    KC_N,    KC_M,    KC_COMM, KC_DOT,KC_SLSH, RSFT_T(KC_ENT),
-    KC_LCTL, KC_LGUI, KC_LALT, KC_RALT,TT(LOWER),KC_SPC,RALT_T(KC_SPC),TT(RAISE),KC_LEFT, KC_DOWN,KC_UP, KC_RGHT
+    KC_LSFT, KC_Z,    KC_X,    KC_C,    KC_V,    KC_B,    KC_N,    KC_M,    KC_COMM, KC_DOT,KC_UP, RSFT_T(KC_ENT),
+    KC_LCTL, KC_LGUI, KC_LALT, KC_RALT,TT(LOWER),KC_SPC,KC_SPC,TT(RAISE),RALT_T(KC_SLSH), KC_LEFT,KC_DOWN, KC_RGHT
 ),
 
 /* Mouse
@@ -98,7 +100,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
  * ,-----------------------------------------------------------------------------------.
  * | Esc  |   !  |   @  |   #  |   $  |   %  |   ^  |   &  |   *  |   (  |   )  | Del  |
  * |------+------+------+------+------+-------------+------+------+------+------+------|
- * | Del  |  F1  |  F2  |  F3  |  F4  |  F5  |  F6  | Home | PgDn | PgUp | End  |  |   |
+ * | Del  |  F1  |  F2  |  F3  |  F4  |  F5  |  F6  |  -   |  =   |  [   |  ]   |  |   |
  * |------+------+------+------+------+------|------+------+------+------+------+------|
  * |      |  F7  |  F8  |  F9  |  F10 |  F11 |  F12 |  _   |  +   |  {   |  }   |      |
  * |------+------+------+------+------+------+------+------+------+------+------+------|
@@ -107,7 +109,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
  */
 [_LOWER] = LAYOUT_planck_grid(
     KC_ESC ,KC_EXLM, KC_AT ,KC_HASH, KC_DLR,KC_PERC,KC_CIRC,KC_AMPR,KC_ASTR,KC_LPRN,KC_RPRN, KC_DEL,
-    KC_DEL , KC_F1 , KC_F2 , KC_F3 , KC_F4 , KC_F5 , KC_F6 ,KC_HOME,KC_PGDN,KC_PGUP, KC_END,KC_PIPE,
+    KC_DEL , KC_F1 , KC_F2 , KC_F3 , KC_F4 , KC_F5 , KC_F6 ,KC_MINS, KC_EQL,KC_LBRC,KC_RBRC,KC_PIPE,
     _______, KC_F7 , KC_F8 , KC_F9 , KC_F10, KC_F11, KC_F12,KC_UNDS,KC_PLUS,KC_LCBR,KC_RCBR,_______,
     _______,_______,_______,_______,_______,_______,_______,_______,KC_MNXT,KC_VOLD,KC_VOLU,KC_MPLY
 ),
@@ -116,18 +118,18 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
  * ,-----------------------------------------------------------------------------------.
  * | Esc  |   1  |   2  |   3  |   4  |   5  |   6  |   7  |   8  |   9  |   0  | Del  |
  * |------+------+------+------+------+-------------+------+------+------+------+------|
- * | Del  |  -   |  =   |  [   |  ]   |      | Left | Down |  Up  | Rght |      |  \   |
+ * | Del  |  -   |  =   |  [   |  ]   |  ?   | PgUp |   4  |   5  |   6  |  +   |  \   |
  * |------+------+------+------+------+------|------+------+------+------+------+------|
- * |      |  _   |  +   |  {   |  }   |      |      |  -   |  =   |  [   |  ]   |      |
+ * |      |  _   |  +   |  {   |  }   |  ¿   | PgDn |   1  |   2  |   3  |  -   |      |
  * |------+------+------+------+------+------+------+------+------+------+------+------|
- * |      |      |      |      |      |             |      |      |      |      |      |
+ * |      |      |      |      |      |             |      |   0  | Home |  =   | End  |
  * `-----------------------------------------------------------------------------------'
  */
 [_RAISE] = LAYOUT_planck_grid(
     KC_ESC , KC_1  , KC_2  , KC_3  , KC_4  , KC_5  , KC_6  , KC_7  , KC_8  , KC_9  , KC_0  , KC_DEL,
-    KC_DEL ,KC_MINS, KC_EQL,KC_LBRC,KC_RBRC,_______,KC_LEFT,KC_DOWN, KC_UP ,KC_RGHT,_______,KC_BSLS,
-    _______,KC_UNDS,KC_PLUS,KC_LCBR,KC_RCBR,_______,_______,KC_MINS, KC_EQL,KC_LBRC,KC_RBRC,_______,
-    _______,_______,_______,_______,_______,_______,_______,_______,KC_HOME,_______,_______, KC_END
+    KC_DEL ,KC_MINS, KC_EQL,KC_LBRC,KC_RBRC,KC_UPQS,KC_PGUP, KC_4  , KC_5  , KC_6  ,KC_PLUS,KC_BSLS,
+    _______,KC_UNDS,KC_PLUS,KC_LCBR,KC_RCBR,KC_INQS,KC_PGDN, KC_1  , KC_2  , KC_3  ,KC_MINS,_______,
+    _______,_______,_______,_______,_______,_______,_______,_______, KC_0  ,KC_HOME, KC_EQL, KC_END
 ),
 
 /* Adjust (Lower + Raise)
@@ -155,17 +157,17 @@ uint16_t get_tapping_term(uint16_t keycode) {
   switch (keycode) {
     case RSFT_T(KC_ENT):
       return 100;
-      case RALT_T(KC_SPC):
-      return TAPPING_TERM + 80;
+      case RALT_T(KC_SLSH):
+      return 180;
     default:
       return TAPPING_TERM;
   }
 }
 
-#ifdef AUDIO_ENABLE
-  float plover_song[][2]     = SONG(PLOVER_SOUND);
-  float plover_gb_song[][2]  = SONG(PLOVER_GOODBYE_SOUND);
-#endif
+// #ifdef AUDIO_ENABLE
+//   float plover_song[][2]     = SONG(PLOVER_SOUND);
+//   float plover_gb_song[][2]  = SONG(PLOVER_GOODBYE_SOUND);
+// #endif
 
 uint32_t layer_state_set_user(uint32_t state) {
   return update_tri_layer_state(state, _LOWER, _RAISE, _ADJUST);
@@ -196,11 +198,11 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
   return true;
 }
 
-bool muse_mode = false;
-uint8_t last_muse_note = 0;
-uint16_t muse_counter = 0;
-uint8_t muse_offset = 70;
-uint16_t muse_tempo = 50;
+// bool muse_mode = false;
+// uint8_t last_muse_note = 0;
+// uint16_t muse_counter = 0;
+// uint8_t muse_offset = 70;
+// uint16_t muse_tempo = 50;
 
 // void encoder_update(bool clockwise) {
 //   if (muse_mode) {
@@ -279,7 +281,7 @@ void matrix_scan_user(void) {
     // SEQ_TWO_KEYS(KC_D, KC_D) {
     //   SEND_STRING(SS_LCTRL("a")SS_LCTRL("c"));
     // }
-    SEQ_THREE_KEYS(KC_D, KC_D, KC_S) {
+    SEQ_THREE_KEYS(KC_D, KC_D, KC_G) {
       SEND_STRING("https://start.duckduckgo.com"SS_TAP(X_ENTER));
     }
     SEQ_TWO_KEYS (KC_R, KC_R) {
