@@ -31,6 +31,8 @@ API_SYSEX_ENABLE = no
 
 LEADER_ENABLE = yes
 
+LINK_TIME_OPTIMIZATION_ENABLE = yes
+
 # Do not enable SLEEP_LED_ENABLE. it uses the same timer as BACKLIGHT_ENABLE
 SLEEP_LED_ENABLE = no    # Breathing sleep LED during USB suspend
 #SLEEP_LED_ENABLE = yes  # Breathing sleep LED during USB suspend

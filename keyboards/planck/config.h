@@ -75,8 +75,8 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 //#define NO_PRINT
 
 #define NO_ACTION_ONESHOT
-#define NO_ACTION_MACRO
-#define NO_ACTION_FUNCTION
+// #define NO_ACTION_MACRO
+// #define NO_ACTION_FUNCTION
 #define LEADER_TIMEOUT 300
 #define LEADER_PER_KEY_TIMING
 #define TAPPING_TOGGLE 2
